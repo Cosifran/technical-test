@@ -3,10 +3,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { ContactForm } from "@/components/ContactForm/contact-form";
+import { set } from "zod";
 
 export default function Home() {
   const scrollRef: any = useRef({});
+  const [open, setOpen] = useState(false);
 
   const scrollToElement = (e: any, id: string) => {
     e.preventDefault();
@@ -164,7 +167,7 @@ export default function Home() {
                   $59.000 / Mes (Pago anual)
                 </p>
               </div>
-              <Button className="fontsize-32 mt-7 w-full bg-[#00454D] py-[26px] text-white hover:bg-[#004D4D]/90">
+              <Button className="fontsize-32 mt-7 w-full bg-[#00454D] py-[26px] text-white hover:bg-[#004D4D]/90" onClick={() => setOpen(true)}>
                 ¡Empieza GRATIS!
               </Button>
               <ul className="fontsize-23 mt-6 space-y-2 text-center text-black">
@@ -188,7 +191,7 @@ export default function Home() {
                   $90.000 / Mes (Pago anual)
                 </p>
               </div>
-              <Button className="fontsize-32 mt-7 w-full bg-[#00454D] py-[26px] text-white hover:bg-[#004D4D]/90">
+              <Button className="fontsize-32 mt-7 w-full bg-[#00454D] py-[26px] text-white hover:bg-[#004D4D]/90" onClick={() => setOpen(true)}>
                 ¡Empieza GRATIS!
               </Button>
               <ul className="fontsize-23 mt-6 space-y-2 text-center text-black">
@@ -313,6 +316,7 @@ export default function Home() {
           />
         </div>
       </div>
+      <ContactForm open={open} setOpen={() => setOpen(!open)} />
     </>
   );
 }

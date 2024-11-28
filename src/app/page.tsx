@@ -1,32 +1,46 @@
+"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { useRef } from "react";
 
 export default function Home() {
+  const scrollRef: any = useRef({});
+
+  const scrollToElement = (e: any, id: string) => {
+    e.preventDefault();
+    if (scrollRef.current[id]) {
+      scrollRef.current[id].scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
-      <div className="w-screen">
-        <nav className="postion-sticky flex items-center justify-between bg-[#008896] px-[48px] py-[16px]">
+    <nav className="position-sticky animate-nav stroke flex items-center justify-between bg-[#008896]  px-[48px] py-[16px] ">
           <Image
+            className="text-black"
             src="/images/logo/logo.svg"
             alt="logo"
             width={134}
             height={39}
           />
-          <div className="flex items-center text-white">
-            <span className="mx-2">Service</span>
-            <span className="mx-2">PYMES</span>
-            <span className="mx-2">LEMP PRO</span>
+          <div className="flex items-center text-white ">
+            <Link href="/dashboard" onClick={(e) => scrollToElement(e, "invoiceElectronic")}>
+              <span className="link-7 mx-2">Service</span>
+            </Link>
+
+            <span className="link-7 mx-2" onClick={(e) => scrollToElement(e, "planes")}>PYMES</span>
+            <span className="link-7 mx-2" onClick={(e) => scrollToElement(e, "clients")}>LEMP PRO</span>
           </div>
           <div>
             <Link href="/dashboard">
-            <Button variant={"white"} className="text-black">
-              Iniciar sesion
-            </Button>
+              <Button variant={"white"} className="text-black">
+                Iniciar sesion
+              </Button>
             </Link>
           </div>
         </nav>
+      <div className="w-screen">
         <div className="grid h-[837px] grid-cols-2 items-center bg-[#008896]">
           <div>
             <div className="px-[48px]">
@@ -59,7 +73,11 @@ export default function Home() {
             height={500}
           />
         </div>
-        <div className="mt-19 grid grid-cols-2">
+        <div
+          className="pt-19 grid grid-cols-2"
+          id="invoiceElectronic"
+          ref={(el: any) => (scrollRef.current["invoiceElectronic"] = el)}
+        >
           <Image
             src="/images/home/section2-svg1.svg"
             className="justify-self-center"
@@ -105,7 +123,7 @@ export default function Home() {
             width={596}
             height={367}
           />
-          <div className="flex flex-col justify-center px-[48px]">
+          <div className="flex flex-col justify-center px-[48px]" >
             <h2 className="subtitle-text font-bold text-black">
               Software Contable
             </h2>
@@ -117,7 +135,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-22">
+        <div className="pt-22"  ref={(el: any) => (scrollRef.current["planes"] = el)}>
           <h3 className="fontsize-48 text-center font-bold text-black">
             Planes
           </h3>
@@ -161,7 +179,7 @@ export default function Home() {
                 LEMP PRO
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-1 flex-col items-center">
+            <CardContent className="flex flex-1 flex-col items-center" >
               <div className="text-center">
                 <p className="fontsize-30 font-semibold text-black">
                   $120.000 / Pago mensual
@@ -182,7 +200,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-19">
+      <div className="pt-19" ref={(el: any) => (scrollRef.current["clients"] = el)}>
         <h3 className="fontsize-40 text-center font-bold text-black">
           ¿Qué dicen nuestros clientes?
         </h3>
@@ -252,14 +270,14 @@ export default function Home() {
             <p className="text-white">notificaciones@lempsoft.co</p>
           </div>
 
-          <div className="space-y-4 mt-10">
+          <div className="mt-10 space-y-4">
             <h4 className=" font-bold text-white">Dirección</h4>
             <p className="text-white">Calle 45 No 11-28 Medellín – Colombia</p>
           </div>
-          <div className="space-y-4 mt-10">
+          <div className="mt-10 space-y-4">
             <h4 className=" font-bold text-white">Conéctate</h4>
-            <div className="flex justify-between w-44">
-              <Link href="#">
+            <div className="flex w-44 justify-between">
+              <Link href="#" className="link-102">
                 <Image
                   src="/images/icon/facebook-icon.svg"
                   alt="facebook"
@@ -267,7 +285,7 @@ export default function Home() {
                   height={24}
                 />
               </Link>
-              <Link href="#">
+              <Link href="#" className="link-102">
                 <Image
                   src="/images/icon/instagram-icon.svg"
                   alt="instagram"
@@ -275,7 +293,7 @@ export default function Home() {
                   height={24}
                 />
               </Link>
-              <Link href="#">
+              <Link href="#" className="link-102">
                 <Image
                   src="/images/icon/youtube-icon.svg"
                   alt="youtube"
@@ -287,8 +305,12 @@ export default function Home() {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <Image src="/images/icon/icon-secundary.svg" alt="logo" width={276} height={232} />
-
+          <Image
+            src="/images/icon/icon-secundary.svg"
+            alt="logo"
+            width={276}
+            height={232}
+          />
         </div>
       </div>
     </>

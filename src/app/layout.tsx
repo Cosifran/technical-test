@@ -6,6 +6,10 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -14,18 +18,17 @@ export default function RootLayout({
 }>) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const pathname = usePathname();
 
-  // const pathname = usePathname();
+  console.log(pathname);
 
   return (
-   <ClerkProvider afterSignOutUrl="/">
-     <html lang="en">
-      <body suppressHydrationWarning={true}>
-        <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {children}
-        </div>
-      </body>
-    </html>
-   </ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/">
+      <html lang="en">
+        <body suppressHydrationWarning={true}>
+          <div className="dark:bg-boxdark-2 dark:text-bodydark">{children}</div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

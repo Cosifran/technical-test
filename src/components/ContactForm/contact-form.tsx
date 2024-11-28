@@ -63,6 +63,7 @@ export function ContactForm({
 
         toast.success(`Solicitud enviada, te contactaremos pronto.`);
         setOpen(false);
+        form.reset();
       } 
     } catch (error) {
         toast.error("No se pudo enviar la solicitud.");
